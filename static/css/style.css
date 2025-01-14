@@ -36,7 +36,7 @@ ul li {
     border-radius: 8px;
     font-size: 1.1rem;
     font-weight: bold;
-    color: #333;
+    color: #ffffff;
     cursor: pointer;
     transition: transform 0.2s, background-color 0.3s;
 }
