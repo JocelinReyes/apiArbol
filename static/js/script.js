@@ -37,8 +37,8 @@ function fetchNotebookContent(notebookName) {
         .then(data => {
             const contentDiv = document.getElementById('content');
             contentDiv.innerHTML = ''; // Limpiar contenido previo
-
-
+             data.forEach(cell => {
+            
 
                     // Mostrar las salidas
                     cell.salidas.forEach(salida => {
