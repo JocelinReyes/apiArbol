@@ -3,3 +3,4 @@ graphviz
 numpy
 flask
 nbformat
+sklearn
