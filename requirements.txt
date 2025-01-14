@@ -1,8 +1,5 @@
 gunicorn
 graphviz
-matplotlib
 numpy
-pandas
-sklearn
 flask
 nbformat
