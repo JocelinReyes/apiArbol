@@ -1,5 +1,6 @@
 gunicorn
 graphviz
 numpy
+sklearn
 flask
 nbformat
