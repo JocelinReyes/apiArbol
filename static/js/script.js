@@ -1,4 +1,4 @@
-// Función que se ejecuta cuando el DOM está listo
+
 document.addEventListener('DOMContentLoaded', function () {
     fetchNotebooksList();
 });
