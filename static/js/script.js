@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Función para obtener la lista de notebooks desde la API
 function fetchNotebooksList() {
-    fetch('https://apiarbol.onrender.com/documentos')
+    fetch('/documentos')
         .then(response => response.json())
         .then(data => {
             const notebooksList = document.getElementById('notebooks-list');
@@ -16,17 +16,12 @@ function fetchNotebooksList() {
                 return;
             }
 
-            // Agregar cada archivo a la lista con un botón
+            // Agregar cada archivo a la lista como un enlace
             data.forEach(notebook => {
                 const li = document.createElement('li');
                 li.textContent = notebook;
-
-                const button = document.createElement('button');
-                button.textContent = 'Abrir';
-                button.style.marginLeft = '10px';
-                button.onclick = () => fetchNotebookContent(notebook);
-
-                li.appendChild(button);
+                li.style.cursor = 'pointer'; // Cambiar el cursor para indicar que es clicable
+                li.onclick = () => fetchNotebookContent(notebook); // Abrir el contenido al hacer clic
                 notebooksList.appendChild(li);
             });
         })
@@ -37,7 +32,7 @@ function fetchNotebooksList() {
 
 // Función para obtener el contenido de un notebook
 function fetchNotebookContent(notebookName) {
-    fetch(`http://127.0.0.1:5000/documentos/contenido/${notebookName}`)
+    fetch(`/documentos/contenido/${notebookName}`)
         .then(response => response.json())
         .then(data => {
             const contentDiv = document.getElementById('content');
@@ -89,4 +84,5 @@ function fetchNotebookContent(notebookName) {
             console.error('Error al obtener el contenido del notebook:', error);
         });
 }
+
 
