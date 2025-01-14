@@ -1,4 +1,4 @@
-
+// Función que se ejecuta cuando el DOM está listo
 document.addEventListener('DOMContentLoaded', function () {
     fetchNotebooksList();
 });
@@ -16,11 +16,17 @@ function fetchNotebooksList() {
                 return;
             }
 
-            // Agregar cada archivo a la lista
+            // Agregar cada archivo a la lista con un botón
             data.forEach(notebook => {
                 const li = document.createElement('li');
                 li.textContent = notebook;
-                li.onclick = () => fetchNotebookContent(notebook);
+
+                const button = document.createElement('button');
+                button.textContent = 'Abrir';
+                button.style.marginLeft = '10px';
+                button.onclick = () => fetchNotebookContent(notebook);
+
+                li.appendChild(button);
                 notebooksList.appendChild(li);
             });
         })
