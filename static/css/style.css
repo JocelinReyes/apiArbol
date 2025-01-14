@@ -71,9 +71,9 @@ pre {
     color: #ecf0f1; /* Texto claro */
     padding: 15px;
     border-radius: 8px;
-    font-family: "Courier New", Courier, monospace;
-    font-size: 14px;
-    line-height: 1.5;
+    font-family: "Fira Code", "Courier New", Courier, monospace; /* Fuente Fira Code */
+    font-size: 15px; /* Tamaño de fuente ajustado */
+    line-height: 1.6; /* Espaciado entre líneas */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra externa */
     border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil */
     overflow-x: auto; /* Barra de desplazamiento horizontal si es necesario */
@@ -85,6 +85,8 @@ pre:hover {
     background-color: #34495e; /* Cambio de color al pasar el cursor */
     transform: scale(1.02); /* Efecto de zoom ligero */
 }
+
+
 
 .footer {
     text-align: center;
@@ -102,3 +104,4 @@ pre:hover {
     text-decoration: none;
     color: #ffcccb;
 }
+
