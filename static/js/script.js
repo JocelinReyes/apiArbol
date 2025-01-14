@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Función para obtener la lista de notebooks desde la API
 function fetchNotebooksList() {
-    fetch('http://127.0.0.1:5000/documentos')
+    fetch('/documentos')
         .then(response => response.json())
         .then(data => {
             const notebooksList = document.getElementById('notebooks-list');
@@ -33,7 +33,7 @@ function fetchNotebooksList() {
 
 // Función para obtener el contenido de un notebook
 function fetchNotebookContent(notebookName) {
-    fetch(`http://127.0.0.1:5000/documentos/contenido/${notebookName}`)
+    fetch(`/documentos/contenido/${notebookName}`)
         .then(response => response.json())
         .then(data => {
             const contentDiv = document.getElementById('content');
@@ -82,7 +82,7 @@ function fetchNotebookContent(notebookName) {
 function fetchTreeImage() {
     const treeImage = document.getElementById('tree-image'); // Asegúrate de tener un <img id="tree-image">
 
-    fetch('http://127.0.0.1:5000/arbol-visual')
+    fetch('/arbol-visual')
         .then(response => response.json())
         .then(data => {
             if (data.ruta) {
