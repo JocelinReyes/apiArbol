@@ -1,4 +1,4 @@
-gunircon
+gunicorn
 graphviz
 matplotlib
 numpy
