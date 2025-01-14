@@ -1,7 +1,6 @@
 // Función que se ejecuta cuando el DOM está listo
 document.addEventListener('DOMContentLoaded', function () {
     fetchNotebooksList();
-    fetchTreeImage();
 });
 
 // Función para obtener la lista de notebooks desde la API
@@ -30,6 +29,7 @@ function fetchNotebooksList() {
             console.error('Error al obtener la lista de notebooks:', error);
         });
 }
+
 // Función para obtener el contenido de un notebook
 function fetchNotebookContent(notebookName) {
     fetch(`/documentos/contenido/${notebookName}`)
@@ -38,17 +38,28 @@ function fetchNotebookContent(notebookName) {
             const contentDiv = document.getElementById('content');
             contentDiv.innerHTML = ''; // Limpiar contenido previo
 
-            // Mostrar únicamente las salidas de tipo imagen
+            // Iterar sobre las celdas del notebook
             data.forEach(cell => {
                 if (cell.tipo === 'código') {
-                    cell.salidas
-                        .filter(salida => salida.tipo === 'imagen') // Filtrar solo imágenes
-                        .forEach(salida => {
+                    cell.salidas.forEach(salida => {
+                        // Renderizar imágenes
+                        if (salida.tipo === 'imagen') {
                             const imgElement = document.createElement('img');
                             imgElement.src = `data:image/png;base64,${salida.contenido}`;
                             imgElement.alt = 'Imagen de salida';
                             contentDiv.appendChild(imgElement);
-                        });
+                        }
+
+                        // Renderizar texto
+                        if (salida.tipo === 'texto') {
+                            const textElement = document.createElement('pre');
+                            textElement.textContent = salida.contenido; // Asignar el texto
+                            textElement.style.padding = '10px';
+                            textElement.style.border = '1px solid #ddd';
+                            textElement.style.margin = '10px 0';
+                            contentDiv.appendChild(textElement);
+                        }
+                    });
                 }
             });
         })
@@ -56,3 +67,4 @@ function fetchNotebookContent(notebookName) {
             console.error('Error al obtener el contenido del notebook:', error);
         });
 }
+
