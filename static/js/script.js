@@ -1,11 +1,12 @@
 // Función que se ejecuta cuando el DOM está listo
 document.addEventListener('DOMContentLoaded', function () {
     fetchNotebooksList();
+    fetchTreeImage();
 });
 
 // Función para obtener la lista de notebooks desde la API
 function fetchNotebooksList() {
-    fetch('/documentos')
+    fetch('http://127.0.0.1:5000/documentos')
         .then(response => response.json())
         .then(data => {
             const notebooksList = document.getElementById('notebooks-list');
@@ -32,15 +33,16 @@ function fetchNotebooksList() {
 
 // Función para obtener el contenido de un notebook
 function fetchNotebookContent(notebookName) {
-    fetch(`/documentos/contenido/${notebookName}`)
+    fetch(`http://127.0.0.1:5000/documentos/contenido/${notebookName}`)
         .then(response => response.json())
         .then(data => {
             const contentDiv = document.getElementById('content');
             contentDiv.innerHTML = ''; // Limpiar contenido previo
-             data.forEach(cell => {
-                const cellDiv = document.createElement('div');
 
-            
+            // Mostrar únicamente las salidas
+            data.forEach(cell => {
+                if (cell.tipo === 'código') {
+                    const cellDiv = document.createElement('div');
 
                     // Mostrar las salidas
                     cell.salidas.forEach(salida => {
@@ -66,17 +68,33 @@ function fetchNotebookContent(notebookName) {
                             `;
                         }
                     });
-                } else if (cell.tipo === 'texto') {
-                    cellDiv.innerHTML = `
-                        <strong>Celda de Markdown:</strong>
-                        <pre>${cell.contenido}</pre>
-                    `;
+
+                    contentDiv.appendChild(cellDiv);
                 }
-                contentDiv.appendChild(cellDiv);
             });
         })
         .catch(error => {
             console.error('Error al obtener el contenido del notebook:', error);
+        });
+}
+
+// Función para obtener y mostrar la última imagen generada del árbol de decisión
+function fetchTreeImage() {
+    const treeImage = document.getElementById('tree-image'); // Asegúrate de tener un <img id="tree-image">
+
+    fetch('http://127.0.0.1:5000/arbol-visual')
+        .then(response => response.json())
+        .then(data => {
+            if (data.ruta) {
+                treeImage.src = `http://127.0.0.1:5000${data.ruta}?t=${new Date().getTime()}`; // Evitar caché
+                treeImage.style.display = 'block';
+            } else {
+                console.error('No se encontró la imagen:', data.mensaje);
+                treeImage.style.display = 'none';
+            }
+        })
+        .catch(error => {
+            console.error('Error al obtener la imagen del árbol:', error);
         });
 }
 
