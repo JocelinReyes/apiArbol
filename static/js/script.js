@@ -52,12 +52,20 @@ function fetchNotebookContent(notebookName) {
 
                         // Renderizar texto
                         if (salida.tipo === 'texto') {
-                            const textElement = document.createElement('pre');
+                          const textElement = document.createElement('pre');
                             textElement.textContent = salida.contenido; // Asignar el texto
-                            textElement.style.padding = '10px';
-                            textElement.style.border = '1px solid #ddd';
-                            textElement.style.margin = '10px 0';
-                            contentDiv.appendChild(textElement);
+                            textElement.style.padding = '15px';
+                            textElement.style.border = '1px solid #ccc';
+                            textElement.style.borderRadius = '8px';
+                            textElement.style.backgroundColor = '#f9f9f9';
+                            textElement.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+                            textElement.style.margin = '15px 0';
+                            textElement.style.fontFamily = '"Courier New", Courier, monospace';
+                            textElement.style.fontSize = '14px';
+                            textElement.style.color = '#333';
+                            textElement.style.whiteSpace = 'pre-wrap'; // Para manejar texto largo con saltos de línea
+                            textElement.style.wordWrap = 'break-word';
+                        contentDiv.appendChild(textElement);
                         }
                     });
                 }
