@@ -1,5 +1,5 @@
 // Función que se ejecuta cuando el DOM está listo
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     fetchNotebooksList();
 });
 
@@ -83,3 +83,4 @@ function fetchNotebookContent(notebookName) {
             console.error('Error al obtener el contenido del notebook:', error);
         });
 }
+
